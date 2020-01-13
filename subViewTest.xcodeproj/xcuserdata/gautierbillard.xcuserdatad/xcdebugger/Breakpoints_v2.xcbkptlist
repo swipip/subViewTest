@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "ECA7FA88-1E3D-42B8-BD57-DD53469910B7"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "243081D9-D960-4575-B932-AB3E94D2BE5D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "subViewTest/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "rotate(onOff:right:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ECEE1192-1C72-463D-B9BC-DAE4DEB88CB7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "subViewTest/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "rotate(onOff:right:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "30B61CAB-EA08-4036-8294-153F8695622C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "subViewTest/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "rotate(onOff:right:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "30B61CAB-EA08-4036-8294-153F8695622C - e9f27a009296204e"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "subViewTest.ViewController.rotate(onOff: Swift.Bool, right: Swift.Bool) -&gt; ()"
+                  moduleName = "subViewTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gautierbillard/Documents/Swift%20Course/Tests/subViewTest/subViewTest/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "1048">
+               </Location>
+               <Location
+                  uuid = "30B61CAB-EA08-4036-8294-153F8695622C - e32baa92239c5905"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 () -&gt; () in subViewTest.ViewController.rotate(onOff: Swift.Bool, right: Swift.Bool) -&gt; ()"
+                  moduleName = "subViewTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gautierbillard/Documents/Swift%20Course/Tests/subViewTest/subViewTest/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D2DB6931-C034-49F0-B2DC-B9D4DDDCE148"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "subViewTest/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "rotate(onOff:right:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D2DB6931-C034-49F0-B2DC-B9D4DDDCE148 - e9f27a009296204e"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "subViewTest.ViewController.rotate(onOff: Swift.Bool, right: Swift.Bool) -&gt; ()"
+                  moduleName = "subViewTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gautierbillard/Documents/Swift%20Course/Tests/subViewTest/subViewTest/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "408">
+               </Location>
+               <Location
+                  uuid = "D2DB6931-C034-49F0-B2DC-B9D4DDDCE148 - 331919a83022cd27"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in subViewTest.ViewController.rotate(onOff: Swift.Bool, right: Swift.Bool) -&gt; ()"
+                  moduleName = "subViewTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gautierbillard/Documents/Swift%20Course/Tests/subViewTest/subViewTest/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

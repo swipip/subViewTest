@@ -14,6 +14,8 @@
 		49D5B02523C794F400D9B146 /* subViewTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49D5B02323C794F400D9B146 /* subViewTest.xcdatamodeld */; };
 		49D5B02723C794F700D9B146 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49D5B02623C794F700D9B146 /* Assets.xcassets */; };
 		49D5B02A23C794F700D9B146 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49D5B02823C794F700D9B146 /* LaunchScreen.storyboard */; };
+		49D5B03323C7952100D9B146 /* SquareTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D5B03223C7952100D9B146 /* SquareTest.xib */; };
+		49D5B03523C7962C00D9B146 /* SquareTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D5B03423C7962C00D9B146 /* SquareTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		49D5B02623C794F700D9B146 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49D5B02923C794F700D9B146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49D5B02B23C794F700D9B146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49D5B03223C7952100D9B146 /* SquareTest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SquareTest.xib; sourceTree = "<group>"; };
+		49D5B03423C7962C00D9B146 /* SquareTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +43,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		493446F823CA68A600324F4A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				49D5B03423C7962C00D9B146 /* SquareTest.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		493446F923CA68B600324F4A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				49D5B01E23C794F400D9B146 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		49D5B00E23C794F400D9B146 = {
 			isa = PBXGroup;
 			children = (
@@ -60,14 +80,24 @@
 			children = (
 				49D5B01A23C794F400D9B146 /* AppDelegate.swift */,
 				49D5B01C23C794F400D9B146 /* SceneDelegate.swift */,
-				49D5B01E23C794F400D9B146 /* ViewController.swift */,
-				49D5B02023C794F400D9B146 /* Main.storyboard */,
+				493446F823CA68A600324F4A /* Model */,
+				493446F923CA68B600324F4A /* Controller */,
+				49D5B03123C7950200D9B146 /* View */,
 				49D5B02623C794F700D9B146 /* Assets.xcassets */,
 				49D5B02823C794F700D9B146 /* LaunchScreen.storyboard */,
 				49D5B02B23C794F700D9B146 /* Info.plist */,
 				49D5B02323C794F400D9B146 /* subViewTest.xcdatamodeld */,
 			);
 			path = subViewTest;
+			sourceTree = "<group>";
+		};
+		49D5B03123C7950200D9B146 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				49D5B02023C794F400D9B146 /* Main.storyboard */,
+				49D5B03223C7952100D9B146 /* SquareTest.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,6 +158,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49D5B03323C7952100D9B146 /* SquareTest.xib in Resources */,
 				49D5B02A23C794F700D9B146 /* LaunchScreen.storyboard in Resources */,
 				49D5B02723C794F700D9B146 /* Assets.xcassets in Resources */,
 				49D5B02223C794F400D9B146 /* Main.storyboard in Resources */,
@@ -141,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49D5B03523C7962C00D9B146 /* SquareTest.swift in Sources */,
 				49D5B01F23C794F400D9B146 /* ViewController.swift in Sources */,
 				49D5B02523C794F400D9B146 /* subViewTest.xcdatamodeld in Sources */,
 				49D5B01B23C794F400D9B146 /* AppDelegate.swift in Sources */,
@@ -289,6 +321,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3ZK349YW98;
 				INFOPLIST_FILE = subViewTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -306,6 +339,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3ZK349YW98;
 				INFOPLIST_FILE = subViewTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
