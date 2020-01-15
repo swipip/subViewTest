@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4934472623CEFFBA00324F4A /* SquareTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4934472523CEFFBA00324F4A /* SquareTest.xib */; };
+		4934472823CF0FE600324F4A /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4934472723CF0FE600324F4A /* SwipeController.swift */; };
 		49D5B01B23C794F400D9B146 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D5B01A23C794F400D9B146 /* AppDelegate.swift */; };
 		49D5B01D23C794F400D9B146 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D5B01C23C794F400D9B146 /* SceneDelegate.swift */; };
 		49D5B01F23C794F400D9B146 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D5B01E23C794F400D9B146 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		4934472523CEFFBA00324F4A /* SquareTest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SquareTest.xib; sourceTree = "<group>"; };
+		4934472723CF0FE600324F4A /* SwipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeController.swift; sourceTree = "<group>"; };
 		49D5B01723C794F400D9B146 /* subViewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = subViewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49D5B01A23C794F400D9B146 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49D5B01C23C794F400D9B146 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				49D5B01E23C794F400D9B146 /* ViewController.swift */,
+				4934472723CF0FE600324F4A /* SwipeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49D5B03523C7962C00D9B146 /* SquareTest.swift in Sources */,
+				4934472823CF0FE600324F4A /* SwipeController.swift in Sources */,
 				49D5B01F23C794F400D9B146 /* ViewController.swift in Sources */,
 				49D5B02523C794F400D9B146 /* subViewTest.xcdatamodeld in Sources */,
 				49D5B01B23C794F400D9B146 /* AppDelegate.swift in Sources */,

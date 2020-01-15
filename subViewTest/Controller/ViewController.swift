@@ -6,7 +6,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet var superView: UIView!
     
-    var squares = [SquareTest]()
+//    var squares = [SquareTest]()
     var position = CGPoint()
     
     var originS: CGPoint?
@@ -15,22 +15,22 @@ class ViewController: UIViewController {
     var differenceFromXOrigin: CGFloat?
     var differenceFromYOrigin: CGFloat?
     
+    let swipeController = SwipeController()
+    
 //MARK: - View preparation
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setOne()
-        setOne()
-        
-        print(view.safeAreaLayoutGuide.layoutFrame)
-        print(view.frame)
+        setOne() //prepare the subview
+        setOne() //prepare the subview
         
     }
     override func viewDidLayoutSubviews() {
         
         originS = CGPoint(x: self.view.center.x , y: view.convert(view.center, to: squares[1]).y+30)
-        squares[0].alpha = 0.0
+        swipeController.squares[0].alpha = 0.0
         
+        //Layout
         layerSetUp(view: squares[0])
         layerSetUp(view: squares[1])
         
@@ -50,13 +50,6 @@ class ViewController: UIViewController {
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         button.layer.insertSublayer(gradientLayer, at: 0)
-        let animation = CABasicAnimation(keyPath: "locations")
-        animation.fromValue = [0.0, 0.0, 0.25]
-        animation.toValue = [0.75, 1.0, 1.0]
-        animation.duration = 3.0
-        animation.autoreverses =  true
-        animation.repeatCount =  Float.infinity
-        gradientLayer.add(animation, forKey: nil)
         
     }
     //MARK: - Methods and Logic
@@ -96,7 +89,7 @@ class ViewController: UIViewController {
         let finalPoint = CGPoint(x:originS!.x + 1000,
                                  y:originS!.y + 50)
         
-        animateCardInOut(finalPoint: finalPoint, view: recognizer.view!)
+        swipeController.animateCardInOut(finalPoint: finalPoint, view: recognizer.view!)
         
         squares[1].setAnchorPoint(CGPoint(x: 0.5,y: 0.5))
         squares[1].removeFromSuperview()
@@ -110,10 +103,11 @@ class ViewController: UIViewController {
             let finalPoint = CGPoint(x:originS!.x + (velocity.x),
                                      y:originS!.y + (velocity.y))
             
-            animateCardInOut(finalPoint: finalPoint, view: recognizer.view!)
+            swipeController.animateCardInOut(finalPoint: finalPoint, view: recognizer.view!)
             
             squares[1].setAnchorPoint(CGPoint(x: 0.5,y: 0.5))
             squares[1].removeFromSuperview()
+            squares[0].transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
             animateReload(view: squares[0])
             
         }else if Float(differenceFromXOrigin!) < Float(150) {
@@ -122,7 +116,7 @@ class ViewController: UIViewController {
             
             let finalPoint = CGPoint(x:originS!.x , y:originS!.y)
             self.squares[1].setAnchorPoint(CGPoint(x: 0.5 ,y: 0.5))
-            animateCardInOut(finalPoint: finalPoint, view: recognizer.view!)
+            swipeController.animateCardInOut(finalPoint: finalPoint, view: recognizer.view!)
             
         }
     }
@@ -135,19 +129,10 @@ class ViewController: UIViewController {
             defineRotationDirection(recognizer: recognizer)
         }
     }
-    func animateCardInOut(finalPoint: CGPoint, view: UIView){
-        
-        UIView.animate(withDuration: 0.5,
-                       delay: 0,
-                       options: UIView.AnimationOptions.curveEaseOut,
-                       animations: {
-                        view.center = finalPoint },
-                       completion: nil)
-        
-    }
+
     func animateReload(view: UIView) {
         self.view.layoutIfNeeded()
-        self.squares[0].transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+
         UIView.animate(withDuration: 0.3, animations: {
             view.alpha = 1
             view.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -155,7 +140,7 @@ class ViewController: UIViewController {
             self.setOne()
             self.squares.remove(at: 1)
         }
-        
+
     }
     func defineRotationDirection(recognizer: UIPanGestureRecognizer) {
         if recognizer.velocity(in: squares[1]).x < 0 {
@@ -173,7 +158,7 @@ class ViewController: UIViewController {
         
         let newSquare = SquareTest()
         
-        squares.append(newSquare)
+        swipeController.squares.append(newSquare)
         
         view.addSubview(newSquare)
         
