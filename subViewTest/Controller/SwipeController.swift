@@ -120,7 +120,6 @@ class SwipeController {
          recognizer.setTranslation(CGPoint.zero, in: motherView)
      }
     func handleSwipe(with recognizer: UISwipeGestureRecognizer) {
-        
         let finalPoint = CGPoint(x:originS!.x + 1000,
                                  y:originS!.y + 50)
         
