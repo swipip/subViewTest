@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4934472623CEFFBA00324F4A /* SquareTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4934472523CEFFBA00324F4A /* SquareTest.xib */; };
 		49D5B01B23C794F400D9B146 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D5B01A23C794F400D9B146 /* AppDelegate.swift */; };
 		49D5B01D23C794F400D9B146 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D5B01C23C794F400D9B146 /* SceneDelegate.swift */; };
 		49D5B01F23C794F400D9B146 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D5B01E23C794F400D9B146 /* ViewController.swift */; };
@@ -14,11 +15,11 @@
 		49D5B02523C794F400D9B146 /* subViewTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49D5B02323C794F400D9B146 /* subViewTest.xcdatamodeld */; };
 		49D5B02723C794F700D9B146 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49D5B02623C794F700D9B146 /* Assets.xcassets */; };
 		49D5B02A23C794F700D9B146 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49D5B02823C794F700D9B146 /* LaunchScreen.storyboard */; };
-		49D5B03323C7952100D9B146 /* SquareTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D5B03223C7952100D9B146 /* SquareTest.xib */; };
 		49D5B03523C7962C00D9B146 /* SquareTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D5B03423C7962C00D9B146 /* SquareTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4934472523CEFFBA00324F4A /* SquareTest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SquareTest.xib; sourceTree = "<group>"; };
 		49D5B01723C794F400D9B146 /* subViewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = subViewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49D5B01A23C794F400D9B146 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49D5B01C23C794F400D9B146 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,7 +29,6 @@
 		49D5B02623C794F700D9B146 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49D5B02923C794F700D9B146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49D5B02B23C794F700D9B146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		49D5B03223C7952100D9B146 /* SquareTest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SquareTest.xib; sourceTree = "<group>"; };
 		49D5B03423C7962C00D9B146 /* SquareTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				49D5B02023C794F400D9B146 /* Main.storyboard */,
-				49D5B03223C7952100D9B146 /* SquareTest.xib */,
+				4934472523CEFFBA00324F4A /* SquareTest.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -158,7 +158,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49D5B03323C7952100D9B146 /* SquareTest.xib in Resources */,
+				4934472623CEFFBA00324F4A /* SquareTest.xib in Resources */,
 				49D5B02A23C794F700D9B146 /* LaunchScreen.storyboard in Resources */,
 				49D5B02723C794F700D9B146 /* Assets.xcassets in Resources */,
 				49D5B02223C794F400D9B146 /* Main.storyboard in Resources */,

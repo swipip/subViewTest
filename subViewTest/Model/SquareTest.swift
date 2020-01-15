@@ -3,7 +3,6 @@ import UIKit
 class SquareTest: UIView {
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var innerTile: UIView!
     
     var position = CGPoint()
     var rotated:(on: Bool,dir: rotatedCases) = (false,.right)

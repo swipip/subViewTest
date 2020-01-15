@@ -5,7 +5,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     @IBOutlet var superView: UIView!
     
-    var square = SquareTest()
+    var squares = [SquareTest]()
     var position = CGPoint()
     
     var originS: CGPoint?
@@ -16,10 +16,29 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setOne()
+        setOne()
+        
     }
     override func viewDidLayoutSubviews() {
         
-        originS = CGPoint(x: self.view.center.x , y: view.convert(view.center, to: square).y)
+        originS = CGPoint(x: self.view.center.x , y: view.convert(view.center, to: squares[1]).y)
+        squares[0].alpha = 0.0
+        
+        layerSetUp(view: squares[0])
+        layerSetUp(view: squares[1])
+        
+    }
+    func layerSetUp(view: UIView) {
+        let gradient = CAGradientLayer()
+
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.red.cgColor, UIColor.orange.cgColor]
+
+        view.layer.insertSublayer(gradient, at: 0)
+        view.layer.cornerRadius = 12
+        view.clipsToBounds = true
         
     }
     @objc func tapHandler() {
@@ -27,16 +46,16 @@ class ViewController: UIViewController {
     }
     @IBAction func btnTouched(_ sender: UIButton) {
         
-        setOne()
+//        setOne()
         
-        let panTest = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        
-        square.addGestureRecognizer(panTest)
+//        let panTest = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+//
+//        square.addGestureRecognizer(panTest)
         
     }
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
         
-        currentS = square.center
+        currentS = squares[1].center
         let translation = recognizer.translation(in: self.view)
         let velocity = recognizer.velocity(in: self.view)
         
@@ -63,32 +82,33 @@ class ViewController: UIViewController {
     func handlePanEnded(velocity: CGPoint, recognizer: UIPanGestureRecognizer){
         if Float(differenceFromXOrigin!) >= Float(150) {
             
-            square.rotate()
+            squares[1].rotate()
             
             let finalPoint = CGPoint(x:originS!.x + (velocity.x),
                                      y:originS!.y + (velocity.y))
             
             animateCardInOut(finalPoint: finalPoint, recognizer: recognizer)
             
-            self.square.setAnchorPoint(CGPoint(x: 0.5,y: 0.5))
-            self.square.removeFromSuperview()
+            squares[1].setAnchorPoint(CGPoint(x: 0.5,y: 0.5))
+            squares[1].removeFromSuperview()
+            animateReload(view: squares[0])
             
         }else if Float(differenceFromXOrigin!) < Float(150) {
             
-            square.rotate()
+            squares[1].rotate()
             
             let finalPoint = CGPoint(x:originS!.x , y:originS!.y)
-            self.square.setAnchorPoint(CGPoint(x: 0.5 ,y: 0.5))
+            self.squares[1].setAnchorPoint(CGPoint(x: 0.5 ,y: 0.5))
             animateCardInOut(finalPoint: finalPoint, recognizer: recognizer)
             
         }
     }
     func changeRotationDirection(recognizer: UIPanGestureRecognizer) {
         if originS!.x > currentS.x {
-            square.rotate()
+            squares[1].rotate()
             defineRotationDirection(recognizer: recognizer)
         }else if originS!.x < currentS.x{
-            square.rotate()
+            squares[1].rotate()
             defineRotationDirection(recognizer: recognizer)
         }
     }
@@ -102,37 +122,50 @@ class ViewController: UIViewController {
                        completion: nil)
         
     }
+    func animateReload(view: UIView) {
+        self.view.layoutIfNeeded()
+        self.squares[0].transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        UIView.animate(withDuration: 0.5, animations: {
+            view.alpha = 1
+            view.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }) { (Bool) in
+            self.setOne()
+            self.squares.remove(at: 1)
+        }
+        
+    }
     func defineRotationDirection(recognizer: UIPanGestureRecognizer) {
-        if recognizer.velocity(in: square).x < 0 {
-            square.setAnchorPoint(CGPoint(x: 0.5, y: 0.9))
-            square.rotated = (true, .right)
-            square.rotate()
+        if recognizer.velocity(in: squares[1]).x < 0 {
+            squares[1].setAnchorPoint(CGPoint(x: 0.5, y: 0.9))
+            squares[1].rotated = (true, .right)
+            squares[1].rotate()
         }else{
-            square.setAnchorPoint(CGPoint(x: 0.5, y: 0.9))
-            square.rotated = (true, .left)
-            square.rotate()
+            squares[1].setAnchorPoint(CGPoint(x: 0.5, y: 0.9))
+            squares[1].rotated = (true, .left)
+            squares[1].rotate()
         }
     }
     //MARK: - View setting
     func setOne() {
         
-        view.addSubview(square)
+        let newSquare = SquareTest()
         
-        square.translatesAutoresizingMaskIntoConstraints = false
+        squares.append(newSquare)
+        
+        view.addSubview(newSquare)
+        
+        newSquare.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            square.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            square.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
-            square.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 60),
-            square.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -20),
+            newSquare.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+            newSquare.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+            newSquare.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 60),
+            newSquare.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -20),
         ])
         
-        let testTouch = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
-        
-        square.innerTile.addGestureRecognizer(testTouch)
-        
-        self.square.alpha = 1
-        
+        let panTest = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        newSquare.addGestureRecognizer(panTest)
+
     }
 }
 //MARK: - Extensions
