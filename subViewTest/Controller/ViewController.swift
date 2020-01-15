@@ -2,7 +2,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet weak var leftButton: UIButton!
     @IBOutlet var superView: UIView!
     
     var squares = [SquareTest]()
@@ -14,43 +15,55 @@ class ViewController: UIViewController {
     var differenceFromXOrigin: CGFloat?
     var differenceFromYOrigin: CGFloat?
     
+//MARK: - View preparation
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setOne()
         setOne()
         
+        print(view.safeAreaLayoutGuide.layoutFrame)
+        print(view.frame)
+        
     }
     override func viewDidLayoutSubviews() {
         
-        originS = CGPoint(x: self.view.center.x , y: view.convert(view.center, to: squares[1]).y)
+        originS = CGPoint(x: self.view.center.x , y: view.convert(view.center, to: squares[1]).y+30)
         squares[0].alpha = 0.0
         
         layerSetUp(view: squares[0])
         layerSetUp(view: squares[1])
         
-    }
-    func layerSetUp(view: UIView) {
-        let gradient = CAGradientLayer()
-
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.red.cgColor, UIColor.orange.cgColor]
-
-        view.layer.insertSublayer(gradient, at: 0)
-        view.layer.cornerRadius = 12
-        view.clipsToBounds = true
+        layoutButton(button: leftButton)
+        layoutButton(button: rightButton)
         
     }
+    func layoutButton(button : UIButton) {
+        
+        button.layer.cornerRadius = 25
+        button.clipsToBounds = true
+        button.layer.masksToBounds = true
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = button.bounds
+        gradientLayer.colors = [UIColor.yellow.cgColor, UIColor.systemOrange.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+        button.layer.insertSublayer(gradientLayer, at: 0)
+        let animation = CABasicAnimation(keyPath: "locations")
+        animation.fromValue = [0.0, 0.0, 0.25]
+        animation.toValue = [0.75, 1.0, 1.0]
+        animation.duration = 3.0
+        animation.autoreverses =  true
+        animation.repeatCount =  Float.infinity
+        gradientLayer.add(animation, forKey: nil)
+        
+    }
+    //MARK: - Methods and Logic
     @objc func tapHandler() {
         
     }
     @IBAction func btnTouched(_ sender: UIButton) {
-        
-//        setOne()
-        
-//        let panTest = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-//
-//        square.addGestureRecognizer(panTest)
         
     }
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
@@ -79,6 +92,16 @@ class ViewController: UIViewController {
         }
         recognizer.setTranslation(CGPoint.zero, in: self.view)
     }
+    @objc func handleSwipe(recognizer: UISwipeGestureRecognizer) {
+        let finalPoint = CGPoint(x:originS!.x + 1000,
+                                 y:originS!.y + 50)
+        
+        animateCardInOut(finalPoint: finalPoint, view: recognizer.view!)
+        
+        squares[1].setAnchorPoint(CGPoint(x: 0.5,y: 0.5))
+        squares[1].removeFromSuperview()
+        animateReload(view: squares[0])
+    }
     func handlePanEnded(velocity: CGPoint, recognizer: UIPanGestureRecognizer){
         if Float(differenceFromXOrigin!) >= Float(150) {
             
@@ -87,7 +110,7 @@ class ViewController: UIViewController {
             let finalPoint = CGPoint(x:originS!.x + (velocity.x),
                                      y:originS!.y + (velocity.y))
             
-            animateCardInOut(finalPoint: finalPoint, recognizer: recognizer)
+            animateCardInOut(finalPoint: finalPoint, view: recognizer.view!)
             
             squares[1].setAnchorPoint(CGPoint(x: 0.5,y: 0.5))
             squares[1].removeFromSuperview()
@@ -99,7 +122,7 @@ class ViewController: UIViewController {
             
             let finalPoint = CGPoint(x:originS!.x , y:originS!.y)
             self.squares[1].setAnchorPoint(CGPoint(x: 0.5 ,y: 0.5))
-            animateCardInOut(finalPoint: finalPoint, recognizer: recognizer)
+            animateCardInOut(finalPoint: finalPoint, view: recognizer.view!)
             
         }
     }
@@ -112,20 +135,20 @@ class ViewController: UIViewController {
             defineRotationDirection(recognizer: recognizer)
         }
     }
-    func animateCardInOut(finalPoint: CGPoint, recognizer: UIPanGestureRecognizer){
+    func animateCardInOut(finalPoint: CGPoint, view: UIView){
         
         UIView.animate(withDuration: 0.5,
                        delay: 0,
                        options: UIView.AnimationOptions.curveEaseOut,
                        animations: {
-                        recognizer.view!.center = finalPoint },
+                        view.center = finalPoint },
                        completion: nil)
         
     }
     func animateReload(view: UIView) {
         self.view.layoutIfNeeded()
         self.squares[0].transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             view.alpha = 1
             view.transform = CGAffineTransform(scaleX: 1, y: 1)
         }) { (Bool) in
@@ -145,7 +168,7 @@ class ViewController: UIViewController {
             squares[1].rotate()
         }
     }
-    //MARK: - View setting
+    //MARK: - SubView setting
     func setOne() {
         
         let newSquare = SquareTest()
@@ -160,12 +183,26 @@ class ViewController: UIViewController {
             newSquare.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
             newSquare.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
             newSquare.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 60),
-            newSquare.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -20),
+            newSquare.bottomAnchor.constraint(equalTo: rightButton.topAnchor, constant: -20),
         ])
         
         let panTest = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         newSquare.addGestureRecognizer(panTest)
+        
+        let swipeGest = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(recognizer:)))
+        newSquare.addGestureRecognizer(swipeGest)
 
+    }
+    func layerSetUp(view: UIView) {
+        let gradient = CAGradientLayer()
+
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.red.cgColor, UIColor.orange.cgColor]
+
+        view.layer.insertSublayer(gradient, at: 0)
+        view.layer.cornerRadius = 12
+        view.clipsToBounds = true
+        
     }
 }
 //MARK: - Extensions
