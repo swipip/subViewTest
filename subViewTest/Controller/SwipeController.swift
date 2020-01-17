@@ -22,9 +22,14 @@ class SwipeController {
     var differenceFromXOrigin: CGFloat?
     var differenceFromYOrigin: CGFloat?
     var motherView: UIView
+    var oldValue = false
+    var myBool = false
+    var notified = false
+    var swipeLimit: CGFloat
     
     init(view: UIView) {
         motherView = view
+        swipeLimit = motherView.frame.width/2 - 40
     }
     
     func animateCardInOut(finalPoint: CGPoint, view: UIView){
@@ -46,15 +51,27 @@ class SwipeController {
             self.delegate?.didFinishedAnimateReload()
             self.squares.remove(at: 1)
         }
-
+        
     }
     func changeRotationDirection(recognizer: UIPanGestureRecognizer) {
-        if originS!.x > currentS.x {
-            squares[1].rotate()
-            defineRotationDirection(recognizer: recognizer)
-        }else if originS!.x < currentS.x{
-            squares[1].rotate()
-            defineRotationDirection(recognizer: recognizer)
+        if currentS.x > motherView.getCenter().x {
+            //view right hand
+            if myBool != oldValue {
+                squares[1].rotate()
+                defineRotationDirection(recognizer: recognizer)
+                oldValue = true //was right
+                notified = false
+            }
+            myBool = true //is right
+        }else{
+            //view left hand
+            if myBool != oldValue {
+                squares[1].rotate()
+                defineRotationDirection(recognizer: recognizer)
+                oldValue = false //was left
+                notified = false
+            }
+            myBool = false  //is left
         }
     }
     func defineRotationDirection(recognizer: UIPanGestureRecognizer) {
@@ -69,8 +86,10 @@ class SwipeController {
         }
     }
     func handlePanEnded(velocity: CGPoint, recognizer: UIPanGestureRecognizer){
-        if Float(differenceFromXOrigin!) >= Float(150) {
+        if Float(differenceFromXOrigin!) >= Float(swipeLimit) {
             
+            notification()
+            notified = false
             squares[1].rotate()
             
             let finalPoint = CGPoint(x:originS!.x + (velocity.x),
@@ -81,10 +100,9 @@ class SwipeController {
             squares[1].setAnchorPoint(CGPoint(x: 0.5,y: 0.5))
             squares[1].removeFromSuperview()
             squares[0].transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            
             animateReload(view: squares[0])
             
-        }else if Float(differenceFromXOrigin!) < Float(150) {
+        }else if Float(differenceFromXOrigin!) < Float(swipeLimit) {
             
             squares[1].rotate()
             
@@ -95,31 +113,41 @@ class SwipeController {
         }
     }
     func handlePan(recognizer: UIPanGestureRecognizer){
-         currentS = squares[1].center
-         let translation = recognizer.translation(in: motherView)
-         let velocity = recognizer.velocity(in: motherView)
-         
-         differenceFromXOrigin = abs((originS?.x)! - currentS.x)
-         differenceFromYOrigin = abs((originS?.y)! - currentS.y)
-         
-         switch recognizer.state {
-         case .began:
-             defineRotationDirection(recognizer: recognizer)
-         case .ended:
-             handlePanEnded(velocity: velocity, recognizer: recognizer)
-         case .changed:
-             changeRotationDirection(recognizer: recognizer)
-         default:
-             print("error")
-         }
-         
-         if let view = recognizer.view {
-             view.center = CGPoint(x:view.center.x + translation.x,
-                                   y:view.center.y + translation.y)
-         }
-         recognizer.setTranslation(CGPoint.zero, in: motherView)
-     }
+        currentS = squares[1].center
+        let translation = recognizer.translation(in: motherView)
+        let velocity = recognizer.velocity(in: motherView)
+        
+        differenceFromXOrigin = abs((originS?.x)! - currentS.x)
+        differenceFromYOrigin = abs((originS?.y)! - currentS.y)
+        
+        switch recognizer.state {
+        case .began:
+            defineRotationDirection(recognizer: recognizer)
+        case .ended:
+            handlePanEnded(velocity: velocity, recognizer: recognizer)
+        case .changed:
+            notification()
+            changeRotationDirection(recognizer: recognizer)
+        default:
+            print("error")
+        }
+        if let view = recognizer.view {
+            view.center = CGPoint(x:view.center.x + translation.x,
+                                  y:view.center.y + 0.2*translation.y)
+        }
+        recognizer.setTranslation(CGPoint.zero, in: motherView)
+    }
+    func notification(){
+        let feedBack = UINotificationFeedbackGenerator()
+        feedBack.prepare()
+        if differenceFromXOrigin! > CGFloat(swipeLimit) && notified == false{
+            notified = true
+            //                print("vibrate at:\(differenceFromXOrigin) and notified : \(notified)")
+            feedBack.notificationOccurred(.success)
+        }
+    }
     func handleSwipe(with recognizer: UISwipeGestureRecognizer) {
+        //        print("swiped")
         let finalPoint = CGPoint(x:originS!.x + 1000,
                                  y:originS!.y + 50)
         
@@ -127,5 +155,31 @@ class SwipeController {
         squares[1].setAnchorPoint(CGPoint(x: 0.5,y: 0.5))
         squares[1].removeFromSuperview()
         animateReload(view: squares[0])
+    }
+}
+extension UIView {
+    func setAnchorPoint(_ point: CGPoint) {
+        var newPoint = CGPoint(x: bounds.size.width * point.x, y: bounds.size.height * point.y)
+        var oldPoint = CGPoint(x: bounds.size.width * layer.anchorPoint.x, y: bounds.size.height * layer.anchorPoint.y);
+        
+        newPoint = newPoint.applying(transform)
+        oldPoint = oldPoint.applying(transform)
+        
+        var position = layer.position
+        
+        position.x -= oldPoint.x
+        position.x += newPoint.x
+        
+        position.y -= oldPoint.y
+        position.y += newPoint.y
+        
+        layer.position = position
+        layer.anchorPoint = point
+    }
+    func getCenter() -> CGPoint {
+        let x = self.frame.width/2
+//        print(self.frame.width)
+        let y = self.frame.height/2
+        return CGPoint(x: x, y: y)
     }
 }
